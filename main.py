@@ -45,12 +45,13 @@ def display_job_info(job_info):
     return info_str
 
 def display_search_history():
-    # 검색 기록을 역순으로 표시
-    for entry in reversed(st.session_state['search_history']):
-        st.text(f"질문: {entry['question']} (검색 종류: {entry['column']})")
-        st.text("답변:")
-        st.write(entry['answer'])
-        st.write("---")
+    # 검색 기록을 역순으로 표시하는 함수 안에서 expander를 사용
+    with st.expander("검색 기록 보기/숨기기"):
+        for entry in reversed(st.session_state['search_history']):
+            st.text(f"질문: {entry['question']} (검색 종류: {entry['column']})")
+            st.text("답변:")
+            st.write(entry['answer'])
+            st.write("---")
 
 def main():
     st.title("채용공고 검색")
@@ -87,4 +88,6 @@ def main():
             })
 
 if __name__ == "__main__":
+    if 'search_history' not in st.session_state:
+        st.session_state['search_history'] = []  # 초기 검색 기록 상태 설정
     main()
