@@ -18,23 +18,20 @@ def fetch_and_store_job_postings(api_url):
 
     # 'data' 키에 해당하는 리스트를 순회하면서 각 정보를 추출하고 데이터베이스에 저장
     for item in data['data']:
-        seq = item['연번']
+        seq = item['순번']
         title = item['채용공고명']
-        kind = item['채용분야']
-        enddate = item['공고마감일']
-        organization = "보건복지부_국립재활원_채용정보" 
+        kind = "x"
+        enddate = item['접수마감기간']
+        organization = "사립학교교직원연금공단_채용공고" 
         # regdate 처리, 값이 없으면 현재 시간으로 설정
         regdate = item.get('regdate', current_time).strip() if item.get('regdate', '').strip() else current_time
-        # 상세정보 URL을 포맷팅하여 content 변수에 저장
-        url = item['상세정보']
-        content = f"자세한 정보는 해당 링크를 참고해주세요: {url}" if url else None
-
+        content = f"채용인원: {item['채용인원(명)']}"
         
         # 데이터베이스에 삽입
         insert_job_posting(seq, title, kind, enddate, organization, content, regdate)
 
 # API 엔드포인트 URL - 실제 요청 URL을 사용합니다.
-api_url = 'https://api.odcloud.kr/api/15012787/v1/uddi:d53418ea-2864-44e3-b534-a92c10510e5b?page=2&perPage=10&serviceKey=bfzIrXZ6samznW7lltLbfU8XyvtHTbku5Q9zjQZQm0%2FTSyawXf2D3O091EYgnILM%2FzSBQxhqkeYqIwwa7srQeQ%3D%3D'
+api_url = 'https://api.odcloud.kr/api/15065016/v1/uddi:fddc92be-07b0-4a74-b2f6-974726118deb?page=1&perPage=10&serviceKey=bfzIrXZ6samznW7lltLbfU8XyvtHTbku5Q9zjQZQm0%2FTSyawXf2D3O091EYgnILM%2FzSBQxhqkeYqIwwa7srQeQ%3D%3D'
 
 # API 엔드포인트로부터 데이터를 가져와서 저장하는 함수를 호출합니다.
 fetch_and_store_job_postings(api_url)
