@@ -34,7 +34,7 @@ def fetch_and_store_job_postings(api_url):
         insert_job_posting(seq, title, kind, enddate, organization, content, regdate)
 
 # API 엔드포인트 URL - 실제 요청 URL을 사용합니다.
-api_url = 'https://api.odcloud.kr/api/15012787/v1/uddi:d53418ea-2864-44e3-b534-a92c10510e5b?page=1&perPage=10&serviceKey=bfzIrXZ6samznW7lltLbfU8XyvtHTbku5Q9zjQZQm0%2FTSyawXf2D3O091EYgnILM%2FzSBQxhqkeYqIwwa7srQeQ%3D%3D'
+api_url = 'https://api.odcloud.kr/api/15012787/v1/uddi:d53418ea-2864-44e3-b534-a92c10510e5b?page=7&perPage=10&serviceKey=bfzIrXZ6samznW7lltLbfU8XyvtHTbku5Q9zjQZQm0%2FTSyawXf2D3O091EYgnILM%2FzSBQxhqkeYqIwwa7srQeQ%3D%3D'
 
 # API 엔드포인트로부터 데이터를 가져와서 저장하는 함수를 호출합니다.
 fetch_and_store_job_postings(api_url)
